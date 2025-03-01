@@ -1,0 +1,36 @@
+{
+  "name": "self-improving-website-cloner",
+  "version": "0.1.0",
+  "description": "A system that automatically extracts website structures and implements iterative improvements using Claude VLM",
+  "type": "module",
+  "main": "implement_iteration_cycle.js",
+  "scripts": {
+    "start": "node implement_iteration_cycle.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "check-structure": "node -e \"import('./implement_iteration_cycle.js').then(({checkProjectStructure}) => checkProjectStructure())\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/self-improving-website-cloner.git"
+  },
+  "keywords": [
+    "claude",
+    "vlm",
+    "website",
+    "cloner",
+    "self-improving",
+    "ai"
+  ],
+  "author": "Claude VLM Team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yourusername/self-improving-website-cloner/issues"
+  },
+  "homepage": "https://github.com/yourusername/self-improving-website-cloner#readme",
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
