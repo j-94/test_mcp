@@ -1,0 +1,83 @@
+{
+  "system_name": "Multi-Agent Website Cloning System",
+  "version": "1.0.0",
+  "description": "A self-improving multi-agent system for website cloning and enhancement",
+  
+  "agent_types": {
+    "orchestrator": {
+      "description": "Coordinates all other agents and manages workflow",
+      "color": "35", 
+      "capabilities": ["scheduling", "task_assignment", "error_handling", "reporting"],
+      "dependencies": []
+    },
+    "crawler": {
+      "description": "Extracts website content and structure",
+      "color": "32",
+      "capabilities": ["web_extraction", "dom_parsing", "asset_collection"],
+      "dependencies": []
+    },
+    "analyzer": {
+      "description": "Analyzes website design patterns and structure",
+      "color": "34",
+      "capabilities": ["pattern_recognition", "component_identification", "design_analysis"],
+      "dependencies": ["crawler"]
+    },
+    "implementation": {
+      "description": "Generates code based on analysis",
+      "color": "33",
+      "capabilities": ["code_generation", "template_creation", "asset_integration"],
+      "dependencies": ["analyzer"]
+    },
+    "feedback": {
+      "description": "Evaluates implementations and provides improvement suggestions",
+      "color": "36",
+      "capabilities": ["quality_assessment", "comparison", "recommendation_generation"],
+      "dependencies": ["implementation"]
+    }
+  },
+  
+  "dynamic_agent_creation": {
+    "enabled": true,
+    "agent_template": {
+      "script_header": "#!/usr/bin/env python3\nimport sys\nimport time\nimport json\nfrom pathlib import Path\n\nCOLOR = \"{color}\"\nAGENT_NAME = \"{agent_name}\"\nAGENT_TITLE = \"{agent_title}\"\nAGENT_ROLE = \"{agent_role}\"\n\ndef print_colored(text):\n    \"\"\"Print colored text.\"\"\"\n    print(f\"\\033[{COLOR}m{text}\\033[0m\")\n",
+      "main_function": "def main():\n    print_colored(f\"=== {AGENT_TITLE} ===\")\n    print_colored(f\"Role: {AGENT_ROLE}\")\n    \n    while True:\n        try:\n            # Read from shared state file\n            try:\n                with open('shared_state.json', 'r') as f:\n                    state = json.load(f)\n            except FileNotFoundError:\n                state = {'messages': []}\n            \n            # Process any new messages\n            for msg in state.get('messages', []):\n                if msg.get('to') == AGENT_NAME and not msg.get('processed'):\n                    print_colored(f\"Received: {msg['content']}\")\n                    msg['processed'] = True\n            \n            # Get user input\n            user_input = input(f\"\\033[{COLOR}m{AGENT_NAME}> \\033[0m\")\n            \n            if user_input.lower() == 'exit':\n                break\n            \n            # Add message to shared state\n            state['messages'].append({\n                'from': AGENT_NAME,\n                'to': 'all',\n                'content': user_input,\n                'timestamp': time.time(),\n                'processed': False\n            })\n            \n            # Write back to shared state\n            with open('shared_state.json', 'w') as f:\n                json.dump(state, f, indent=2)\n            \n            time.sleep(0.1)  # Prevent busy waiting\n            \n        except KeyboardInterrupt:\n            break\n        except Exception as e:\n            print_colored(f\"Error: {e}\")\n            time.sleep(1)\n\nif __name__ == '__main__':\n    main()"
+    },
+    "bash_task_template": "#!/bin/bash\n\necho \"==== {AGENT_TITLE} ====\"\n\nif command -v claude &> /dev/null; then\n  claude \"As the {AGENT_TITLE}, {AGENT_DESCRIPTION}. {TASK_DESCRIPTION}\"\nelse\n  echo \"Claude CLI not available. Would have performed: {TASK_DESCRIPTION}\"\n  # Create a sample output as a demonstration\n  echo \"{SAMPLE_OUTPUT}\" > ./output/{OUTPUT_FILENAME}\n  echo \"Created sample output in ./output/{OUTPUT_FILENAME}\"\nfi\n"
+  },
+  
+  "communication_protocol": {
+    "message_format": {
+      "message_id": "UUID string",
+      "source_agent": "Name of sending agent",
+      "destination_agent": "Name of receiving agent",
+      "message_type": "request|response|notification|error",
+      "timestamp": "ISO-8601 timestamp",
+      "priority": "0-10 integer",
+      "payload": "Message-specific data",
+      "metadata": "Additional context information"
+    },
+    "shared_state_file": "shared_state.json"
+  },
+  
+  "forevervm_integration": {
+    "enabled": true,
+    "sandbox_mode": "secure",
+    "allowed_packages": ["requests", "beautifulsoup4", "lxml", "pillow"],
+    "timeout_seconds": 30,
+    "memory_limit_mb": 512
+  },
+  
+  "meta_prompting": {
+    "enabled": true,
+    "template": "You are {AGENT_TITLE}, part of a multi-agent website cloning system. Your role is to {AGENT_DESCRIPTION}.\n\nCurrent website: {WEBSITE_URL}\nCurrent iteration: {ITERATION_NUMBER}\n\nYour specific task is to {TASK_DESCRIPTION}.\n\nOutput your results to the ./output directory and update the ../shared/communication_protocol.json when complete."
+  },
+  
+  "cost_monitoring": {
+    "enabled": true,
+    "track_tokens": true,
+    "track_api_calls": true,
+    "budget_limit": 10.0,
+    "alert_threshold": 8.0,
+    "log_file": "cost_monitor.log"
+  }
+}

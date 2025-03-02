@@ -1,0 +1,320 @@
+
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --danger-color: #e74c3c;
+    --background-color: #f5f7fa;
+    --card-color: #ffffff;
+    --text-color: #2c3e50;
+    --border-color: #dce0e6;
+    --success-color: #27ae60;
+    --warning-color: #f39c12;
+    --error-color: #c0392b;
+    --idle-color: #7f8c8d;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.container {
+    display: flex;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    background-color: var(--text-color);
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 0.8rem;
+}
+
+.status-badge.idle {
+    background-color: var(--idle-color);
+    color: white;
+}
+
+.status-badge.running {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.status-badge.error {
+    background-color: var(--error-color);
+    color: white;
+}
+
+.forevervm-badge {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+.forevervm-badge.disabled {
+    background-color: var(--idle-color);
+}
+
+.sidebar {
+    width: 300px;
+    margin-right: 20px;
+}
+
+.control-panel {
+    background-color: var(--card-color);
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.control-panel h2, .control-panel h3 {
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.control-panel h3 {
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #555;
+}
+
+.control-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn.primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn.secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn.danger {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.btn.mini {
+    padding: 4px 8px;
+    font-size: 0.8rem;
+}
+
+.url-input {
+    display: flex;
+    gap: 5px;
+}
+
+.url-input input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.sandbox-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sandbox-status {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.9rem;
+}
+
+.code-input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.code-input textarea {
+    height: 120px;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-family: monospace;
+    resize: vertical;
+}
+
+.main-content {
+    flex: 1;
+}
+
+.agents-panel, .output-panel, .sandbox-panel, .metrics-panel {
+    background-color: var(--card-color);
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.agent-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+}
+
+.agent-card {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.agent-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.agent-header h3 {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.agent-status {
+    font-size: 0.8rem;
+    padding: 3px 8px;
+    border-radius: 12px;
+}
+
+.agent-status.idle {
+    background-color: var(--idle-color);
+    color: white;
+}
+
+.agent-status.running {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.agent-status.error {
+    background-color: var(--error-color);
+    color: white;
+}
+
+.agent-controls {
+    display: flex;
+    gap: 10px;
+    padding: 10px 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.agent-output {
+    padding: 10px 15px;
+}
+
+.output-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.output-header h4 {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.output-text, .system-output, .sandbox-output {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 0.9rem;
+    max-height: 150px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+.system-output, .sandbox-output {
+    max-height: 300px;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 15px;
+}
+
+.metric-card {
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: var(--text-color);
+    color: white;
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+    

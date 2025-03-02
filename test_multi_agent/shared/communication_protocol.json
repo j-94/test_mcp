@@ -1,0 +1,23 @@
+{
+  "message_format": {
+    "message_id": "UUID string",
+    "source_agent": "Name of sending agent",
+    "destination_agent": "Name of receiving agent",
+    "message_type": "request|response|notification|error",
+    "timestamp": "ISO-8601 timestamp",
+    "priority": "0-10 integer",
+    "payload": "Message-specific data",
+    "metadata": "Additional context information"
+  },
+  "agent_states": {
+    "crawler": "idle",
+    "analysis": "idle",
+    "implementation": "idle",
+    "feedback": "idle",
+    "orchestrator": "idle"
+  },
+  "project_state": "initializing",
+  "current_iteration": 1,
+  "error_states": {},
+  "completion_percentage": 0
+}

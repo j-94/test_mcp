@@ -1,0 +1,49 @@
+{
+  "forevervm": {
+    "enabled": true,
+    "api_token_env": "FOREVERVM_API_TOKEN",
+    "timeout_seconds": 60,
+    "default_packages": [
+      "requests",
+      "beautifulsoup4",
+      "pytest",
+      "pandas",
+      "numpy"
+    ],
+    "sandbox_settings": {
+      "allow_network": true,
+      "persistent_storage": true,
+      "memory_limit_mb": 1024,
+      "cpu_limit": 1.0
+    },
+    "agent_integrations": {
+      "implementation": {
+        "enabled": true,
+        "auto_test": true,
+        "auto_retry_on_failure": true
+      },
+      "analysis": {
+        "enabled": true,
+        "auto_validate": true
+      },
+      "feedback": {
+        "enabled": true,
+        "apply_suggested_fixes": false
+      },
+      "crawler": {
+        "enabled": true,
+        "safety_checks": true
+      }
+    },
+    "logging": {
+      "level": "info",
+      "capture_stdout": true,
+      "capture_stderr": true,
+      "log_directory": "${AGENT_DIR}/logs/forevervm",
+      "rotation": {
+        "max_files": 10,
+        "max_size_mb": 100
+      }
+    }
+  }
+}
